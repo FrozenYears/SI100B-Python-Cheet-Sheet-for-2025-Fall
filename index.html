@@ -61,10 +61,27 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin: 0 0 1rem 0;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             line-height: 1.2;
+            
+            /* --- 修复核心开始 --- */
+            
+            /* 1. 使用 inline-block，强迫背景只包裹文字范围，解决色块过宽问题 */
+            display: inline-block; 
+            
+            /* 2. 先设置一个兜底的白色，万一渐变失效，用户还能看到白字，而不是透明字 */
+            color: #ffffff; 
+            
+            /* 3. 定义背景渐变 */
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-color) 100%);
+            
+            /* 4. 同时写上标准属性和 webkit 前缀，提高兼容性 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            
+            /* 5. 最后再将文字设为透明，让背景显露出来 */
+            -webkit-text-fill-color: transparent;
+            
+            /* --- 修复核心结束 --- */
         }
 
         .description {
